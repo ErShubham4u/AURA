@@ -1,0 +1,321 @@
+
+{% extends "store/base.html" %}
+
+{% block title %}
+AURA — Luxury Perfumes
+{% endblock %}
+
+{% block content %}
+
+<!-- HERO SECTION -->
+<section class="hero">
+
+    <div class="hero-content">
+
+        <p class="hero-label">THE ART OF FRAGRANCE</p>
+
+        <h1>
+            Discover Your
+            <span>Signature Scent</span>
+        </h1>
+
+        <p class="hero-text">
+            Luxury fragrances crafted with passion, designed to make every
+            moment unforgettable.
+        </p>
+
+        <a href="#" class="btn">
+            SHOP COLLECTION
+        </a>
+
+    </div>
+
+</section>
+
+
+<!-- CATEGORY SECTION -->
+<section class="categories container">
+
+    <div class="section-title">
+        <p>EXPLORE</p>
+        <h2>Find Your Fragrance</h2>
+    </div>
+
+    <div class="category-grid">
+
+        <div class="category-card">
+            <div>
+                <p>FOR HIM</p>
+                <h3>Men's Collection</h3>
+                <a href="#">Explore →</a>
+            </div>
+        </div>
+
+        <div class="category-card">
+            <div>
+                <p>FOR HER</p>
+                <h3>Women's Collection</h3>
+                <a href="#">Explore →</a>
+            </div>
+        </div>
+
+        <div class="category-card">
+            <div>
+                <p>FOR EVERYONE</p>
+                <h3>Unisex Collection</h3>
+                <a href="#">Explore →</a>
+            </div>
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- BESTSELLERS -->
+<section class="products-section">
+
+    <div class="container">
+
+        <div class="section-title">
+            <p>OUR COLLECTION</p>
+            <h2>Bestsellers</h2>
+            <span>
+                Fragrances loved by our customers
+            </span>
+        </div>
+
+
+        <!-- PRODUCT GRID -->
+        <div class="product-grid">
+
+            {% for product in products %}
+
+            <div class="product-card">
+
+                <div class="product-image">
+
+                    {% if product.is_featured %}
+                        <span class="badge">BESTSELLER</span>
+                    {% endif %}
+
+                    {% if product.image %}
+
+                        <img
+                            src="{{ product.image.url }}"
+                            alt="{{ product.name }}"
+                        >
+
+                    {% else %}
+
+                        <div class="perfume-bottle">
+                            AURA
+                        </div>
+
+                    {% endif %}
+
+                </div>
+
+
+                <div class="product-info">
+
+                    <p>
+                        {{ product.get_category_display }}
+                    </p>
+
+                    <h3>
+                        {{ product.name }}
+                    </h3>
+
+                    <span>
+                        {{ product.fragrance_notes }}
+                    </span>
+
+
+                    <div class="product-bottom">
+
+                        <strong>
+
+                            {% if product.discount_price %}
+                                ₹{{ product.discount_price }}
+                            {% else %}
+                                ₹{{ product.price }}
+                            {% endif %}
+
+                        </strong>
+
+                        <button type="button">
+                            +
+                        </button>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            {% empty %}
+
+                <p>No featured products available.</p>
+
+            {% endfor %}
+
+        </div>
+
+
+        <div class="center">
+
+            <a href="#" class="outline-btn">
+                VIEW ALL PERFUMES
+            </a>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- BRAND STORY -->
+<section class="story">
+
+    <div class="container story-grid">
+
+        <div class="story-image">
+            AURA
+        </div>
+
+        <div class="story-content">
+
+            <p>OUR STORY</p>
+
+            <h2>
+                A Fragrance Is More Than Just A Scent
+            </h2>
+
+            <p>
+                At AURA, we believe fragrance is a form of self-expression.
+            </p>
+
+            <p>
+                Every bottle is created to capture emotions, memories and
+                moments that deserve to last forever.
+            </p>
+
+            <a href="#" class="text-link">
+                DISCOVER OUR STORY →
+            </a>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- WHY CHOOSE US -->
+<section class="why-us container">
+
+    <div class="section-title">
+
+        <p>THE AURA DIFFERENCE</p>
+
+        <h2>Why Choose Us?</h2>
+
+    </div>
+
+
+    <div class="features">
+
+        <div class="feature">
+
+            <div class="feature-icon">✦</div>
+
+            <h3>Premium Ingredients</h3>
+
+            <p>
+                Carefully selected ingredients for an exceptional fragrance.
+            </p>
+
+        </div>
+
+
+        <div class="feature">
+
+            <div class="feature-icon">◉</div>
+
+            <h3>Long Lasting</h3>
+
+            <p>
+                Fragrances designed to stay with you throughout the day.
+            </p>
+
+        </div>
+
+
+        <div class="feature">
+
+            <div class="feature-icon">◇</div>
+
+            <h3>Elegant Packaging</h3>
+
+            <p>
+                Beautiful bottles designed with luxury in mind.
+            </p>
+
+        </div>
+
+
+        <div class="feature">
+
+            <div class="feature-icon">♡</div>
+
+            <h3>Made With Passion</h3>
+
+            <p>
+                Every fragrance is created with attention to detail.
+            </p>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- NEWSLETTER -->
+<section class="newsletter">
+
+    <div class="container">
+
+        <p>JOIN THE AURA WORLD</p>
+
+        <h2>
+            Get 10% Off Your First Order
+        </h2>
+
+        <p>
+            Subscribe for new launches, exclusive offers and fragrance stories.
+        </p>
+
+        <form>
+
+            <input
+                type="email"
+                placeholder="Enter your email"
+                required
+            />
+
+            <button type="submit">
+                SUBSCRIBE
+            </button>
+
+        </form>
+
+    </div>
+
+</section>
+
+
+{% endblock %}
+
