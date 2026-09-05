@@ -811,3 +811,282 @@ input {
     object-fit: cover;
     display: block;
 }
+
+/* =========================================
+   AURA PRODUCT PAGE — FINAL PREMIUM DESIGN
+========================================= */
+
+.product-detail {
+    padding: 90px 0;
+    background: #f8f6f1;
+}
+
+.product-detail-grid {
+    display: grid;
+    grid-template-columns: 1.1fr 0.9fr;
+    gap: 80px;
+    align-items: center;
+}
+
+
+/* IMAGE */
+
+.product-detail-image {
+    height: 620px;
+    width: 100%;
+    position: relative;
+    overflow: hidden;
+    background: #e9e4da;
+}
+
+.product-detail-image img {
+    width: 100%;
+    height: 100%;
+    display: block;
+    object-fit: cover;
+    transition: transform 0.8s ease;
+}
+
+.product-detail-image:hover img {
+    transform: scale(1.04);
+}
+
+
+/* IMAGE BORDER */
+
+.product-detail-image::after {
+    content: "";
+    position: absolute;
+    inset: 18px;
+    border: 1px solid rgba(255,255,255,0.6);
+    pointer-events: none;
+}
+
+
+/* INFO */
+
+.product-detail-info {
+    padding: 20px 0;
+}
+
+
+/* CATEGORY */
+
+.product-category {
+    color: #b18a2c;
+    font-size: 11px;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    margin-bottom: 18px;
+}
+
+
+/* TITLE */
+
+.product-detail-info h1 {
+    font-family: Georgia, serif;
+    font-size: 58px;
+    font-weight: 500;
+    line-height: 1.05;
+    color: #111;
+    margin: 0 0 15px;
+}
+
+
+/* NOTES */
+
+.product-notes {
+    color: #777;
+    font-size: 16px;
+    margin-bottom: 28px;
+}
+
+
+/* PRICE */
+
+.product-price {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+    margin-bottom: 30px;
+}
+
+.product-price strong {
+    font-size: 32px;
+    font-weight: 600;
+    color: #111;
+}
+
+.product-price del {
+    font-size: 17px;
+    color: #999;
+}
+
+
+/* DESCRIPTION */
+
+.product-description {
+    max-width: 540px;
+    color: #666;
+    font-size: 15px;
+    line-height: 1.9;
+    margin-bottom: 35px;
+}
+
+
+/* META */
+
+.product-meta {
+    border-top: 1px solid #ddd8ce;
+    border-bottom: 1px solid #ddd8ce;
+    padding: 22px 0;
+    margin-bottom: 35px;
+}
+
+.product-meta p {
+    display: flex;
+    justify-content: space-between;
+    margin: 0 0 15px;
+    font-size: 14px;
+}
+
+.product-meta p:last-child {
+    margin-bottom: 0;
+}
+
+.product-meta strong {
+    color: #222;
+    letter-spacing: 1px;
+}
+
+.product-meta span {
+    color: #666;
+}
+
+.in-stock {
+    color: #287a45 !important;
+}
+
+.out-stock {
+    color: #b3261e !important;
+}
+
+
+/* BUTTON */
+
+.add-cart-btn {
+    width: 100%;
+    max-width: 430px;
+    padding: 19px 30px;
+
+    background: #111;
+    color: white;
+
+    border: 1px solid #111;
+
+    font-size: 11px;
+    letter-spacing: 4px;
+
+    cursor: pointer;
+
+    transition: 0.3s ease;
+}
+
+.add-cart-btn:hover {
+    background: #d4af37;
+    border-color: #d4af37;
+    color: #111;
+}
+
+
+/* OUT OF STOCK */
+
+.add-cart-btn.disabled {
+    background: #ccc;
+    border-color: #ccc;
+    color: #777;
+    cursor: not-allowed;
+}
+
+
+/* =========================================
+   MOBILE
+========================================= */
+
+@media (max-width: 700px) {
+
+    .product-detail {
+        padding: 20px 0 60px;
+    }
+
+    .product-detail-grid {
+        grid-template-columns: 1fr;
+        gap: 0;
+    }
+
+    .product-detail-image {
+        height: 420px;
+    }
+
+    .product-detail-info {
+        padding: 32px 5px 0;
+    }
+
+    .product-category {
+        font-size: 9px;
+        letter-spacing: 3px;
+        margin-bottom: 12px;
+    }
+
+    .product-detail-info h1 {
+        font-size: 40px;
+        line-height: 1.05;
+    }
+
+    .product-notes {
+        font-size: 14px;
+        margin-bottom: 22px;
+    }
+
+    .product-price {
+        gap: 12px;
+        margin-bottom: 25px;
+    }
+
+    .product-price strong {
+        font-size: 26px;
+    }
+
+    .product-price del {
+        font-size: 15px;
+    }
+
+    .product-description {
+        font-size: 14px;
+        line-height: 1.8;
+    }
+
+    .product-meta {
+        margin-bottom: 28px;
+    }
+
+    .add-cart-btn {
+        max-width: 100%;
+    }
+}
+
+
+/* SMALL MOBILE */
+
+@media (max-width: 450px) {
+
+    .product-detail-image {
+        height: 380px;
+    }
+
+    .product-detail-info h1 {
+        font-size: 36px;
+    }
+
+}
+
