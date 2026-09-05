@@ -1,22 +1,22 @@
 from django.shortcuts import render
-
-def home(request):
-    return render(request, "store/home.html")
-
-from django.shortcuts import render
 from .models import Product
 
 
 def home(request):
-
-    products = Product.objects.filter(
-        is_featured=True
-    )
+    products = Product.objects.filter(is_featured=True)
 
     return render(
         request,
         "store/home.html",
-        {
-            "products": products
-        }
+        {"products": products}
+    )
+
+
+def shop(request):
+    products = Product.objects.all().order_by("-created_at")
+
+    return render(
+        request,
+        "store/shop.html",
+        {"products": products}
     )
