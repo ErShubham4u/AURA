@@ -1,127 +1,77 @@
-{% extends "store/base.html" %}
-
-{% block title %}
-{{ product.name }} — AURA Perfumes
-{% endblock %}
-
-{% block content %}
+{% extends "store/base.html" %} {% block title %} {{ product.name }} — AURA
+Perfumes {% endblock %} {% block content %}
 
 <section class="product-detail">
-
-    <div class="container product-detail-grid">
-
-        <!-- PRODUCT IMAGE -->
-        <div class="product-detail-image">
-
-            {% if product.image %}
-                <img
-                    src="{{ product.image.url }}"
-                    alt="{{ product.name }}"
-                >
-            {% else %}
-                <div class="perfume-bottle">
-                    AURA
-                </div>
-            {% endif %}
-
-        </div>
-
-
-        <!-- PRODUCT INFORMATION -->
-        <div class="product-detail-info">
-
-            <p class="product-category">
-                {{ product.get_category_display }}
-            </p>
-
-            <h1>{{ product.name }}</h1>
-
-            <p class="product-notes">
-                {{ product.fragrance_notes }}
-            </p>
-
-
-            <!-- PRICE -->
-            <div class="product-price">
-
-                {% if product.discount_price %}
-
-                    <strong>
-                        ₹{{ product.discount_price }}
-                    </strong>
-
-                    <del>
-                        ₹{{ product.price }}
-                    </del>
-
-                {% else %}
-
-                    <strong>
-                        ₹{{ product.price }}
-                    </strong>
-
-                {% endif %}
-
-            </div>
-
-
-            <!-- DESCRIPTION -->
-            <p class="product-description">
-                {{ product.description }}
-            </p>
-
-
-            <!-- DETAILS -->
-            <div class="product-meta">
-
-                <p>
-                    <strong>Size</strong>
-                    <span>{{ product.size }}</span>
-                </p>
-
-                <p>
-                    <strong>Stock</strong>
-
-                    {% if product.stock > 0 %}
-                        <span class="in-stock">
-                            In Stock
-                        </span>
-                    {% else %}
-                        <span class="out-stock">
-                            Out of Stock
-                        </span>
-                    {% endif %}
-
-                </p>
-
-            </div>
-
-
-            <!-- ADD TO CART -->
-            {% if product.stock > 0 %}
-
-                <a href="{% url 'add_to_cart' product.id %}"  class="add-cart-btn">
-                    ADD TO CART
-                </a>
-
-                
-
-            {% else %}
-
-                <button
-                    type="button"
-                    class="add-cart-btn disabled"
-                    disabled
-                >
-                    OUT OF STOCK
-                </button>
-
-            {% endif %}
-
-        </div>
-
+  <div class="container product-detail-grid">
+    <!-- PRODUCT IMAGE -->
+    <div class="product-detail-image">
+      {% if product.image %}
+      <img src="{{ product.image.url }}" alt="{{ product.name }}" />
+      {% else %}
+      <div class="perfume-bottle">AURA</div>
+      {% endif %}
     </div>
 
+    <!-- PRODUCT INFORMATION -->
+    <div class="product-detail-info">
+      <p class="product-category">{{ product.get_category_display }}</p>
+
+      <h1>{{ product.name }}</h1>
+
+      <p class="product-notes">{{ product.fragrance_notes }}</p>
+
+      <!-- PRICE -->
+      <div class="product-price">
+        {% if product.discount_price %}
+
+        <strong> ₹{{ product.discount_price }} </strong>
+
+        <del> ₹{{ product.price }} </del>
+
+        {% else %}
+
+        <strong> ₹{{ product.price }} </strong>
+
+        {% endif %}
+      </div>
+
+      <!-- DESCRIPTION -->
+      <p class="product-description">{{ product.description }}</p>
+
+      <!-- DETAILS -->
+      <div class="product-meta">
+        <p>
+          <strong>Size</strong>
+          <span>{{ product.size }}</span>
+        </p>
+
+        <p>
+          <strong>Stock</strong>
+
+          {% if product.stock > 0 %}
+          <span class="in-stock"> In Stock </span>
+          {% else %}
+          <span class="out-stock"> Out of Stock </span>
+          {% endif %}
+        </p>
+      </div>
+
+      <!-- ADD TO CART -->
+      {% if product.stock > 0 %}
+
+      <a href="{% url 'add_to_cart' product.id %}" class="add-cart-btn">
+        ADD TO CART
+      </a>
+
+      {% else %}
+
+      <button type="button" class="add-cart-btn disabled" disabled>
+        OUT OF STOCK
+      </button>
+
+      {% endif %}
+    </div>
+  </div>
 </section>
 
 {% endblock %}

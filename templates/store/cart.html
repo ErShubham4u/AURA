@@ -21,50 +21,80 @@ Shopping Cart — AURA
 
                 {% for item in cart_items %}
 
-                <div class="cart-item">
+                    <div class="cart-item">
 
-                    <div class="cart-image">
+                        <div class="cart-image">
 
-                        {% if item.product.image %}
-                            <img
-                                src="{{ item.product.image.url }}"
-                                alt="{{ item.product.name }}"
-                            >
-                        {% else %}
-                            <div class="perfume-bottle">
-                                AURA
+                            {% if item.product.image %}
+
+                                <img
+                                    src="{{ item.product.image.url }}"
+                                    alt="{{ item.product.name }}"
+                                >
+
+                            {% else %}
+
+                                <div class="perfume-bottle">
+                                    AURA
+                                </div>
+
+                            {% endif %}
+
+                        </div>
+
+
+                        <div class="cart-info">
+
+                            <p>
+                                {{ item.product.get_category_display }}
+                            </p>
+
+                            <h3>
+                                {{ item.product.name }}
+                            </h3>
+
+
+                            <div class="quantity-control">
+
+                                <a
+                                    href="{% url 'decrease_quantity' item.product.id %}"
+                                >
+                                    −
+                                </a>
+
+                                <span>
+                                    {{ item.quantity }}
+                                </span>
+
+                                <a
+                                    href="{% url 'increase_quantity' item.product.id %}"
+                                >
+                                    +
+                                </a>
+
                             </div>
-                        {% endif %}
+
+
+                            <a
+                                href="{% url 'remove_from_cart' item.product.id %}"
+                                class="remove-cart"
+                            >
+                                Remove
+                            </a>
+
+                        </div>
+
+
+                        <div class="cart-price">
+                            ₹{{ item.item_total }}
+                        </div>
 
                     </div>
-
-                    <div class="cart-info">
-
-                        <p>
-                            {{ item.product.get_category_display }}
-                        </p>
-
-                        <h3>
-                            {{ item.product.name }}
-                        </h3>
-
-                        <span>
-                            Quantity: {{ item.quantity }}
-                        </span>
-
-                    </div>
-
-                    <div class="cart-price">
-
-                        ₹{{ item.item_total }}
-
-                    </div>
-
-                </div>
 
                 {% endfor %}
 
             </div>
+
 
             <div class="cart-summary">
 
@@ -78,13 +108,19 @@ Shopping Cart — AURA
 
             </div>
 
+
         {% else %}
 
             <div class="empty-cart">
 
-                <h3>Your cart is empty.</h3>
+                <h3>
+                    Your cart is empty.
+                </h3>
 
-                <a href="{% url 'shop' %}" class="btn">
+                <a
+                    href="{% url 'shop' %}"
+                    class="btn"
+                >
                     SHOP PERFUMES
                 </a>
 
