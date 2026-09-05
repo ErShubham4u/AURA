@@ -1,3 +1,4 @@
+
 {% extends "store/base.html" %}
 
 {% block title %}
@@ -11,10 +12,21 @@ Shop — AURA Perfumes
     <div class="container">
 
         <div class="section-title">
+
             <p>OUR COLLECTION</p>
-            <h2>Shop All Perfumes</h2>
+
+            <h2>
+                {% if category_name %}
+                    {{ category_name }}
+                {% else %}
+                    Shop All Perfumes
+                {% endif %}
+            </h2>
+
             <span>Discover your perfect fragrance</span>
+
         </div>
+
 
         <div class="product-grid">
 
@@ -25,39 +37,53 @@ Shop — AURA Perfumes
                 <div class="product-image">
 
                     {% if product.image %}
+
                         <img
                             src="{{ product.image.url }}"
                             alt="{{ product.name }}"
                         >
+
                     {% else %}
+
                         <div class="perfume-bottle">
                             AURA
                         </div>
+
                     {% endif %}
 
                 </div>
 
+
                 <div class="product-info">
 
-                    <p>{{ product.get_category_display }}</p>
+                    <p>
+                        {{ product.get_category_display }}
+                    </p>
 
-                    <h3>{{ product.name }}</h3>
+                    <h3>
+                        {{ product.name }}
+                    </h3>
 
                     <span>
                         {{ product.fragrance_notes }}
                     </span>
 
+
                     <div class="product-bottom">
 
                         <strong>
+
                             {% if product.discount_price %}
                                 ₹{{ product.discount_price }}
                             {% else %}
                                 ₹{{ product.price }}
                             {% endif %}
+
                         </strong>
 
-                        <button>+</button>
+                        <button type="button">
+                            +
+                        </button>
 
                     </div>
 

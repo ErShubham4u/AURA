@@ -1,102 +1,82 @@
 {% load static %}
 
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
     <title>{% block title %}AURA Perfumes{% endblock %}</title>
 
-    <link rel="stylesheet" href="{% static 'css/style.css' %}">
-</head>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}" />
+  </head>
 
-<body>
-
+  <body>
     <!-- NAVBAR -->
     <header class="navbar">
-        <div class="container nav-container">
+      <div class="container nav-container">
+        <a href="{% url 'home' %}" class="logo"> AURA </a>
 
-            <a href="{% url 'home' %}" class="logo">
-                AURA
-            </a>
+        <nav class="nav-links">
+          <a href="{% url 'home' %}">Home</a>
+          <a href="{% url 'shop' %}">Shop</a>
+          <a href="{% url 'men' %}">Men</a>
+          <a href="{% url 'women' %}">Women</a>
+          <a href="{% url 'unisex' %}">Unisex</a>
+          <a href="#">About</a>
+          <a href="#">Contact</a>
+        </nav>
 
-            <nav class="nav-links">
-                <a href="{% url 'home' %}">Home</a>
-                <a href="{% url 'shop' %}">Shop</a>
-                <a href="#">Men</a>
-                <a href="#">Women</a>
-                <a href="#">Unisex</a>
-                <a href="#">About</a>
-                <a href="#">Contact</a>
-            </nav>
-
-            <div class="nav-actions">
-                <a href="#" class="nav-icon">♡</a>
-                <a href="#" class="nav-icon">🛒</a>
-                <a href="#" class="login-btn">Login</a>
-            </div>
-
+        <div class="nav-actions">
+          <a href="#" class="nav-icon">♡</a>
+          <a href="#" class="nav-icon">🛒</a>
+          <a href="#" class="login-btn">Login</a>
         </div>
+      </div>
     </header>
 
-
     <!-- PAGE CONTENT -->
-    <main>
-        {% block content %}
-        {% endblock %}
-    </main>
-
+    <main>{% block content %} {% endblock %}</main>
 
     <!-- FOOTER -->
     <footer class="footer">
+      <div class="container footer-grid">
+        <div class="footer-brand">
+          <h2>AURA</h2>
 
-        <div class="container footer-grid">
-
-            <div class="footer-brand">
-                <h2>AURA</h2>
-
-                <p>
-                    Luxury fragrances crafted to create
-                    unforgettable memories.
-                </p>
-            </div>
-
-            <div class="footer-column">
-                <h3>Shop</h3>
-
-                <a href="#">Men's Perfumes</a>
-                <a href="#">Women's Perfumes</a>
-                <a href="#">Unisex</a>
-                <a href="#">Gift Sets</a>
-            </div>
-
-            <div class="footer-column">
-                <h3>Customer Care</h3>
-
-                <a href="#">Contact Us</a>
-                <a href="#">Shipping</a>
-                <a href="#">Returns</a>
-                <a href="#">FAQs</a>
-            </div>
-
-            <div class="footer-column">
-                <h3>Follow Us</h3>
-
-                <a href="#">Instagram</a>
-                <a href="#">Facebook</a>
-                <a href="#">YouTube</a>
-            </div>
-
+          <p>Luxury fragrances crafted to create unforgettable memories.</p>
         </div>
 
-        <div class="footer-bottom">
-            <p>
-                © 2026 AURA Perfumes. All rights reserved.
-            </p>
+        <div class="footer-column">
+          <h3>Shop</h3>
+
+          <a href="#">Men's Perfumes</a>
+          <a href="#">Women's Perfumes</a>
+          <a href="#">Unisex</a>
+          <a href="#">Gift Sets</a>
         </div>
 
+        <div class="footer-column">
+          <h3>Customer Care</h3>
+
+          <a href="#">Contact Us</a>
+          <a href="#">Shipping</a>
+          <a href="#">Returns</a>
+          <a href="#">FAQs</a>
+        </div>
+
+        <div class="footer-column">
+          <h3>Follow Us</h3>
+
+          <a href="#">Instagram</a>
+          <a href="#">Facebook</a>
+          <a href="#">YouTube</a>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <p>© 2026 AURA Perfumes. All rights reserved.</p>
+      </div>
     </footer>
-
-</body>
+  </body>
 </html>

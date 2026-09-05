@@ -20,3 +20,33 @@ def shop(request):
         "store/shop.html",
         {"products": products}
     )
+
+
+def men_products(request):
+    products = Product.objects.filter(category="men")
+
+    return render(
+        request,
+        "store/shop.html",
+        {"products": products, "category_name": "Men's Perfumes"}
+    )
+
+
+def women_products(request):
+    products = Product.objects.filter(category="women")
+
+    return render(
+        request,
+        "store/shop.html",
+        {"products": products, "category_name": "Women's Perfumes"}
+    )
+
+
+def unisex_products(request):
+    products = Product.objects.filter(category="unisex")
+
+    return render(
+        request,
+        "store/shop.html",
+        {"products": products, "category_name": "Unisex Perfumes"}
+    )
