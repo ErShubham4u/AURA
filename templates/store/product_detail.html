@@ -100,9 +100,11 @@
             <!-- ADD TO CART -->
             {% if product.stock > 0 %}
 
-                <button type="button" class="add-cart-btn">
+                <a href="{% url 'add_to_cart' product.id %}"  class="add-cart-btn">
                     ADD TO CART
-                </button>
+                </a>
+
+                
 
             {% else %}
 

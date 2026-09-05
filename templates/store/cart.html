@@ -1,0 +1,99 @@
+{% extends "store/base.html" %}
+
+{% block title %}
+Shopping Cart — AURA
+{% endblock %}
+
+{% block content %}
+
+<section class="cart-section">
+
+    <div class="container">
+
+        <div class="section-title">
+            <p>YOUR BAG</p>
+            <h2>Shopping Cart</h2>
+        </div>
+
+        {% if cart_items %}
+
+            <div class="cart-list">
+
+                {% for item in cart_items %}
+
+                <div class="cart-item">
+
+                    <div class="cart-image">
+
+                        {% if item.product.image %}
+                            <img
+                                src="{{ item.product.image.url }}"
+                                alt="{{ item.product.name }}"
+                            >
+                        {% else %}
+                            <div class="perfume-bottle">
+                                AURA
+                            </div>
+                        {% endif %}
+
+                    </div>
+
+                    <div class="cart-info">
+
+                        <p>
+                            {{ item.product.get_category_display }}
+                        </p>
+
+                        <h3>
+                            {{ item.product.name }}
+                        </h3>
+
+                        <span>
+                            Quantity: {{ item.quantity }}
+                        </span>
+
+                    </div>
+
+                    <div class="cart-price">
+
+                        ₹{{ item.item_total }}
+
+                    </div>
+
+                </div>
+
+                {% endfor %}
+
+            </div>
+
+            <div class="cart-summary">
+
+                <h3>
+                    Total: ₹{{ total }}
+                </h3>
+
+                <button class="btn">
+                    PROCEED TO CHECKOUT
+                </button>
+
+            </div>
+
+        {% else %}
+
+            <div class="empty-cart">
+
+                <h3>Your cart is empty.</h3>
+
+                <a href="{% url 'shop' %}" class="btn">
+                    SHOP PERFUMES
+                </a>
+
+            </div>
+
+        {% endif %}
+
+    </div>
+
+</section>
+
+{% endblock %}
