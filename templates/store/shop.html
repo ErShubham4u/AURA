@@ -23,7 +23,9 @@ Shop — AURA Perfumes
                 {% endif %}
             </h2>
 
-            <span>Discover your perfect fragrance</span>
+            <span>
+                Discover your perfect fragrance
+            </span>
 
         </div>
 
@@ -32,7 +34,8 @@ Shop — AURA Perfumes
 
             {% for product in products %}
 
-            <div class="product-card">
+            <a href="{% url 'product_detail' product.slug %}"
+               class="product-card">
 
                 <div class="product-image">
 
@@ -89,7 +92,7 @@ Shop — AURA Perfumes
 
                 </div>
 
-            </div>
+            </a>
 
             {% empty %}
 

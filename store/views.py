@@ -50,3 +50,13 @@ def unisex_products(request):
         "store/shop.html",
         {"products": products, "category_name": "Unisex Perfumes"}
     )
+
+def product_detail(request, slug):
+
+    product = Product.objects.get(slug=slug)
+
+    return render(
+        request,
+        "store/product_detail.html",
+        {"product": product}
+    )
