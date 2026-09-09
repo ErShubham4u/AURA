@@ -167,3 +167,75 @@ def remove_from_cart(request, product_id):
     request.session.modified = True
 
     return redirect("cart")
+
+# def checkout(request):
+#     cart_data = request.session.get("cart", {})
+
+#     if not cart_data:
+#         return redirect("cart")
+
+#     cart_items = []
+#     total = 0
+
+#     for product_id, quantity in cart_data.items():
+
+#         product = get_object_or_404(
+#             Product,
+#             id=product_id
+#         )
+
+#         price = product.discount_price or product.price
+
+#         item_total = price * quantity
+#         total += item_total
+
+#         cart_items.append({
+#             "product": product,
+#             "quantity": quantity,
+#             "item_total": item_total,
+#         })
+
+#     # Handle PLACE ORDER
+#     if request.method == "POST":
+
+#         name = request.POST.get("name")
+#         mobile = request.POST.get("mobile")
+#         address = request.POST.get("address")
+#         city = request.POST.get("city")
+#         pincode = request.POST.get("pincode")
+#         payment_method = request.POST.get("payment_method")
+
+#         # For now, print the customer details
+#         # Later we will save these in Order model
+#         print("Name:", name)
+#         print("Mobile:", mobile)
+#         print("Address:", address)
+#         print("City:", city)
+#         print("Pincode:", pincode)
+#         print("Payment:", payment_method)
+#         print("Total:", total)
+
+#         # Clear cart after order
+#         request.session["cart"] = {}
+#         request.session.modified = True
+
+#         return redirect("home")
+
+#     return render(
+#         request,
+#         "store/checkout.html",
+#         {
+#             "cart_items": cart_items,
+#             "total": total,
+#         }
+#     )
+
+
+
+
+
+
+
+
+
+

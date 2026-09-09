@@ -17,114 +17,117 @@ Shopping Cart — AURA
 
         {% if cart_items %}
 
-            <div class="cart-list">
+        <div class="cart-list">
 
-                {% for item in cart_items %}
+            {% for item in cart_items %}
 
-                    <div class="cart-item">
+            <div class="cart-item">
 
-                        <div class="cart-image">
+                <div class="cart-image">
 
-                            {% if item.product.image %}
+                    {% if item.product.image %}
 
-                                <img
-                                    src="{{ item.product.image.url }}"
-                                    alt="{{ item.product.name }}"
-                                >
+                    <img
+                        src="{{ item.product.image.url }}"
+                        alt="{{ item.product.name }}"
+                    >
 
-                            {% else %}
+                    {% else %}
 
-                                <div class="perfume-bottle">
-                                    AURA
-                                </div>
+                    <div class="perfume-bottle">
+                        AURA
+                    </div>
 
-                            {% endif %}
+                    {% endif %}
 
-                        </div>
-
-
-                        <div class="cart-info">
-
-                            <p>
-                                {{ item.product.get_category_display }}
-                            </p>
-
-                            <h3>
-                                {{ item.product.name }}
-                            </h3>
+                </div>
 
 
-                            <div class="quantity-control">
+                <div class="cart-info">
 
-                                <a
-                                    href="{% url 'decrease_quantity' item.product.id %}"
-                                >
-                                    −
-                                </a>
+                    <p>
+                        {{ item.product.get_category_display }}
+                    </p>
 
-                                <span>
-                                    {{ item.quantity }}
-                                </span>
-
-                                <a
-                                    href="{% url 'increase_quantity' item.product.id %}"
-                                >
-                                    +
-                                </a>
-
-                            </div>
+                    <h3>
+                        {{ item.product.name }}
+                    </h3>
 
 
-                            <a
-                                href="{% url 'remove_from_cart' item.product.id %}"
-                                class="remove-cart"
-                            >
-                                Remove
-                            </a>
+                    <div class="quantity-control">
 
-                        </div>
+                        <a
+                            href="{% url 'decrease_quantity' item.product.id %}"
+                        >
+                            −
+                        </a>
 
+                        <span>
+                            {{ item.quantity }}
+                        </span>
 
-                        <div class="cart-price">
-                            ₹{{ item.item_total }}
-                        </div>
+                        <a
+                            href="{% url 'increase_quantity' item.product.id %}"
+                        >
+                            +
+                        </a>
 
                     </div>
 
-                {% endfor %}
+
+                    <a
+                        href="{% url 'remove_from_cart' item.product.id %}"
+                        class="remove-cart"
+                    >
+                        Remove
+                    </a>
+
+                </div>
+
+
+                <div class="cart-price">
+                    ₹{{ item.item_total }}
+                </div>
 
             </div>
 
+            {% endfor %}
 
-            <div class="cart-summary">
+        </div>
 
-                <h3>
-                    Total: ₹{{ total }}
-                </h3>
 
-                <button class="btn">
-                    PROCEED TO CHECKOUT
-                </button>
+        <div class="cart-summary">
 
-            </div>
+            <h3>
+                Total: ₹{{ total }}
+            </h3>
+
+            <a
+                href="{% url 'checkout' %}"
+                class="btn"
+            >
+                PROCEED TO CHECKOUT
+            </a>
+
+        </div>
 
 
         {% else %}
 
-            <div class="empty-cart">
+        <div class="empty-cart">
 
-                <h3>
-                    Your cart is empty.
-                </h3>
+            <h3>
+                Your cart is empty.
+            </h3>
 
-                <a
-                    href="{% url 'shop' %}"
-                    class="btn"
-                >
-                    SHOP PERFUMES
-                </a>
+            <a
+                href="{% url 'shop' %}"
+                class="btn"
+            >
+                SHOP PERFUMES
+            </a>
 
-            </div>
+        </div>
 
         {% endif %}
 
