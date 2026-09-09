@@ -1,0 +1,478 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Register | AURA</title>
+
+    <style>
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+
+        body {
+            min-height: 100vh;
+            background: #f7f5f1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .register-wrapper {
+            width: 100%;
+            max-width: 1000px;
+            min-height: 600px;
+            background: #ffffff;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            box-shadow: 0 15px 50px rgba(0, 0, 0, 0.12);
+            border-radius: 12px;
+            overflow: hidden;
+        }
+
+
+        /* LEFT SIDE */
+
+        .register-banner {
+            background: #171717;
+            color: #ffffff;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            padding: 60px;
+        }
+
+        .brand {
+            font-size: 42px;
+            letter-spacing: 8px;
+            margin-bottom: 15px;
+        }
+
+        .tagline {
+            font-size: 14px;
+            letter-spacing: 3px;
+            color: #c9c9c9;
+            margin-bottom: 30px;
+        }
+
+        .banner-text {
+            color: #bdbdbd;
+            line-height: 1.8;
+            font-size: 15px;
+            max-width: 380px;
+        }
+
+
+        /* RIGHT SIDE */
+
+        .register-section {
+            padding: 60px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .back-home {
+            text-decoration: none;
+            color: #666;
+            font-size: 14px;
+            margin-bottom: 35px;
+            display: inline-block;
+        }
+
+        .back-home:hover {
+            color: #111;
+        }
+
+        .register-section h2 {
+            font-size: 32px;
+            color: #171717;
+            margin-bottom: 10px;
+        }
+
+        .subtitle {
+            color: #777;
+            font-size: 14px;
+            margin-bottom: 30px;
+        }
+
+
+        /* ERROR */
+
+        .error-message {
+            background: #fff0f0;
+            color: #c0392b;
+            padding: 12px 15px;
+            border-radius: 6px;
+            font-size: 13px;
+            margin-bottom: 20px;
+            border: 1px solid #f3cccc;
+        }
+
+
+        /* FORM */
+
+        .form-group {
+            margin-bottom: 18px;
+        }
+
+        .form-group label {
+            display: block;
+            font-size: 13px;
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 8px;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 13px 15px;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            outline: none;
+            font-size: 14px;
+            transition: 0.3s;
+        }
+
+        .form-group input:focus {
+            border-color: #222;
+        }
+
+
+        /* PASSWORD */
+
+        .password-box {
+            position: relative;
+        }
+
+        .password-box input {
+            padding-right: 50px;
+        }
+
+        .password-toggle {
+            position: absolute;
+            right: 10px;
+            top: 50%;
+            transform: translateY(-50%);
+            border: none;
+            background: transparent;
+            cursor: pointer;
+            font-size: 16px;
+            padding: 5px;
+        }
+
+
+        /* BUTTON */
+
+        .register-btn {
+            width: 100%;
+            padding: 15px;
+            border: none;
+            background: #171717;
+            color: #ffffff;
+            font-size: 14px;
+            letter-spacing: 1px;
+            cursor: pointer;
+            border-radius: 6px;
+            transition: 0.3s;
+            margin-top: 5px;
+        }
+
+        .register-btn:hover {
+            background: #333;
+        }
+
+
+        /* LOGIN */
+
+        .login-text {
+            text-align: center;
+            margin-top: 25px;
+            font-size: 14px;
+            color: #777;
+        }
+
+        .login-text a {
+            color: #111;
+            font-weight: 600;
+            text-decoration: none;
+        }
+
+        .login-text a:hover {
+            text-decoration: underline;
+        }
+
+
+        /* MOBILE */
+
+        @media (max-width: 768px) {
+
+            .register-wrapper {
+                grid-template-columns: 1fr;
+                max-width: 500px;
+            }
+
+            .register-banner {
+                min-height: 250px;
+                padding: 40px;
+            }
+
+            .brand {
+                font-size: 32px;
+            }
+
+            .banner-text {
+                display: none;
+            }
+
+            .register-section {
+                padding: 40px 30px;
+            }
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+    <div class="register-wrapper">
+
+
+        <!-- LEFT SIDE -->
+
+        <div class="register-banner">
+
+            <div class="brand">
+                AURA
+            </div>
+
+            <div class="tagline">
+                THE ART OF FRAGRANCE
+            </div>
+
+            <p class="banner-text">
+                Create your AURA account and discover
+                fragrances crafted to express your
+                personality, elegance and individuality.
+            </p>
+
+        </div>
+
+
+        <!-- RIGHT SIDE -->
+
+        <div class="register-section">
+
+
+            <!-- BACK TO HOME -->
+
+            <a
+                href="{% url 'home' %}"
+                class="back-home"
+            >
+                ← Back to Home
+            </a>
+
+
+            <h2>
+                Create Account
+            </h2>
+
+            <p class="subtitle">
+                Join AURA and discover your signature scent.
+            </p>
+
+
+            <!-- ERROR MESSAGE -->
+
+            {% if error %}
+
+                <div class="error-message">
+                    {{ error }}
+                </div>
+
+            {% endif %}
+
+
+            <!-- REGISTER FORM -->
+
+            <form method="POST">
+
+                {% csrf_token %}
+
+
+                <!-- USERNAME -->
+
+                <div class="form-group">
+
+                    <label for="username">
+                        Username
+                    </label>
+
+                    <input
+                        type="text"
+                        id="username"
+                        name="username"
+                        placeholder="Choose a username"
+                        autocomplete="username"
+                        required
+                    >
+
+                </div>
+
+
+                <!-- EMAIL -->
+
+                <div class="form-group">
+
+                    <label for="email">
+                        Email Address
+                    </label>
+
+                    <input
+                        type="email"
+                        id="email"
+                        name="email"
+                        placeholder="Enter your email"
+                        autocomplete="email"
+                        required
+                    >
+
+                </div>
+
+
+                <!-- PASSWORD -->
+
+                <div class="form-group">
+
+                    <label for="password">
+                        Password
+                    </label>
+
+                    <div class="password-box">
+
+                        <input
+                            type="password"
+                            id="password"
+                            name="password"
+                            placeholder="Create a password"
+                            minlength="8"
+                            autocomplete="new-password"
+                            required
+                        >
+
+                        <button
+                            type="button"
+                            class="password-toggle"
+                            onclick="togglePassword('password', this)"
+                        >
+                            👁
+                        </button>
+
+                    </div>
+
+                </div>
+
+
+                <!-- CONFIRM PASSWORD -->
+
+                <div class="form-group">
+
+                    <label for="confirm_password">
+                        Confirm Password
+                    </label>
+
+                    <div class="password-box">
+
+                        <input
+                            type="password"
+                            id="confirm_password"
+                            name="confirm_password"
+                            placeholder="Confirm your password"
+                            minlength="8"
+                            autocomplete="new-password"
+                            required
+                        >
+
+                        <button
+                            type="button"
+                            class="password-toggle"
+                            onclick="togglePassword('confirm_password', this)"
+                        >
+                            👁
+                        </button>
+
+                    </div>
+
+                </div>
+
+
+                <!-- BUTTON -->
+
+                <button
+                    type="submit"
+                    class="register-btn"
+                >
+                    CREATE ACCOUNT
+                </button>
+
+            </form>
+
+
+            <!-- LOGIN -->
+
+            <p class="login-text">
+
+                Already have an account?
+
+                <a href="{% url 'login' %}">
+                    Login
+                </a>
+
+            </p>
+
+
+        </div>
+
+    </div>
+
+
+    <!-- PASSWORD TOGGLE -->
+
+    <script>
+
+        function togglePassword(fieldId, button) {
+
+            const field = document.getElementById(fieldId);
+
+            if (field.type === "password") {
+
+                field.type = "text";
+                button.innerHTML = "🙈";
+
+            } else {
+
+                field.type = "password";
+                button.innerHTML = "👁";
+
+            }
+
+        }
+
+    </script>
+
+</body>
+
+</html>

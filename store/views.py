@@ -1,4 +1,4 @@
-from django.core.serializers import python
+
 from django.shortcuts import render, redirect, get_object_or_404
 from .models import Product, Order, OrderItem
 from django.db import transaction
