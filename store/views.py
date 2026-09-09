@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect, get_object_or_404
-from .models import Product
+from .models import Product, Order
 
 
 def home(request):
@@ -168,74 +168,69 @@ def remove_from_cart(request, product_id):
 
     return redirect("cart")
 
-# def checkout(request):
-#     cart_data = request.session.get("cart", {})
 
-#     if not cart_data:
-#         return redirect("cart")
+def checkout(request):
 
-#     cart_items = []
-#     total = 0
+    cart_data = request.session.get("cart", {})
 
-#     for product_id, quantity in cart_data.items():
+    if not cart_data:
+        return redirect("cart")
 
-#         product = get_object_or_404(
-#             Product,
-#             id=product_id
-#         )
+    cart_items = []
+    total = 0
 
-#         price = product.discount_price or product.price
+    for product_id, quantity in cart_data.items():
 
-#         item_total = price * quantity
-#         total += item_total
+        product = get_object_or_404(
+            Product,
+            id=product_id
+        )
 
-#         cart_items.append({
-#             "product": product,
-#             "quantity": quantity,
-#             "item_total": item_total,
-#         })
+        price = product.discount_price or product.price
 
-#     # Handle PLACE ORDER
-#     if request.method == "POST":
+        item_total = price * quantity
+        total += item_total
 
-#         name = request.POST.get("name")
-#         mobile = request.POST.get("mobile")
-#         address = request.POST.get("address")
-#         city = request.POST.get("city")
-#         pincode = request.POST.get("pincode")
-#         payment_method = request.POST.get("payment_method")
+        cart_items.append({
+            "product": product,
+            "quantity": quantity,
+            "item_total": item_total,
+        })
 
-#         # For now, print the customer details
-#         # Later we will save these in Order model
-#         print("Name:", name)
-#         print("Mobile:", mobile)
-#         print("Address:", address)
-#         print("City:", city)
-#         print("Pincode:", pincode)
-#         print("Payment:", payment_method)
-#         print("Total:", total)
+    # HANDLE PLACE ORDER
+    if request.method == "POST":
 
-#         # Clear cart after order
-#         request.session["cart"] = {}
-#         request.session.modified = True
+        name = request.POST.get("name")
+        mobile = request.POST.get("mobile")
+        address = request.POST.get("address")
+        city = request.POST.get("city")
+        pincode = request.POST.get("pincode")
+        payment_method = request.POST.get("payment_method")
 
-#         return redirect("home")
+        # SAVE ORDER IN DATABASE
+        order = Order.objects.create(
+            name=name,
+            mobile=mobile,
+            address=address,
+            city=city,
+            pincode=pincode,
+            payment_method=payment_method,
+            total_amount=total,
+        )
 
-#     return render(
-#         request,
-#         "store/checkout.html",
-#         {
-#             "cart_items": cart_items,
-#             "total": total,
-#         }
-#     )
+        print("Order Created:", order.id)
 
+        # CLEAR CART
+        request.session["cart"] = {}
+        request.session.modified = True
 
+        return redirect("home")
 
-
-
-
-
-
-
-
+    return render(
+        request,
+        "store/checkout.html",
+        {
+            "cart_items": cart_items,
+            "total": total,
+        }
+    )
