@@ -1,5 +1,7 @@
+from django.core.serializers import python
 from django.shortcuts import render, redirect, get_object_or_404
-from .models import Product, Order
+from .models import Product, Order, OrderItem
+from django.db import transaction
 
 
 def home(request):
@@ -168,16 +170,27 @@ def remove_from_cart(request, product_id):
 
     return redirect("cart")
 
+from django.shortcuts import render, redirect, get_object_or_404
+from django.db import transaction
+
+from .models import Product, Order, OrderItem
+
 
 def checkout(request):
 
+    # GET CART FROM SESSION
     cart_data = request.session.get("cart", {})
 
+    # IF CART IS EMPTY
     if not cart_data:
         return redirect("cart")
 
     cart_items = []
     total = 0
+
+    # ==============================
+    # GET CART PRODUCTS
+    # ==============================
 
     for product_id, quantity in cart_data.items():
 
@@ -186,20 +199,33 @@ def checkout(request):
             id=product_id
         )
 
+        # CHECK STOCK
+        if quantity > product.stock:
+            return redirect("cart")
+
+        # GET SELLING PRICE
         price = product.discount_price or product.price
 
+        # CALCULATE ITEM TOTAL
         item_total = price * quantity
+
+        # CALCULATE CART TOTAL
         total += item_total
 
+        # ADD ITEM TO CART ITEMS
         cart_items.append({
             "product": product,
             "quantity": quantity,
             "item_total": item_total,
         })
 
+    # ==============================
     # HANDLE PLACE ORDER
+    # ==============================
+
     if request.method == "POST":
 
+        # GET CUSTOMER DETAILS
         name = request.POST.get("name")
         mobile = request.POST.get("mobile")
         address = request.POST.get("address")
@@ -207,24 +233,82 @@ def checkout(request):
         pincode = request.POST.get("pincode")
         payment_method = request.POST.get("payment_method")
 
-        # SAVE ORDER IN DATABASE
-        order = Order.objects.create(
-            name=name,
-            mobile=mobile,
-            address=address,
-            city=city,
-            pincode=pincode,
-            payment_method=payment_method,
-            total_amount=total,
-        )
+        # ==============================
+        # CREATE ORDER
+        # ==============================
 
+        with transaction.atomic():
+
+            order = Order.objects.create(
+                name=name,
+                mobile=mobile,
+                address=address,
+                city=city,
+                pincode=pincode,
+                payment_method=payment_method,
+                total_amount=total,
+            )
+
+            # ==============================
+            # CREATE ORDER ITEMS
+            # + REDUCE STOCK
+            # ==============================
+
+            for product_id, quantity in cart_data.items():
+
+                product = get_object_or_404(
+                    Product,
+                    id=product_id
+                )
+
+                # CHECK STOCK AGAIN
+                if quantity > product.stock:
+                    return redirect("cart")
+
+                # GET SELLING PRICE
+                price = product.discount_price or product.price
+
+                # CALCULATE ITEM TOTAL
+                item_total = price * quantity
+
+                # CREATE ORDER ITEM
+                OrderItem.objects.create(
+                    order=order,
+                    product=product,
+                    quantity=quantity,
+                    price=price,
+                    total=item_total,
+                )
+
+                # REDUCE STOCK
+                product.stock -= quantity
+                product.save()
+
+        # PRINT ORDER ID
         print("Order Created:", order.id)
 
+        # ==============================
         # CLEAR CART
+        # ==============================
+
         request.session["cart"] = {}
         request.session.modified = True
 
-        return redirect("home")
+        # ==============================
+        # ORDER SUCCESS PAGE
+        # ==============================
+
+        return render(
+            request,
+            "store/order_success.html",
+            {
+                "order": order,
+            }
+        )
+
+    # ==============================
+    # CHECKOUT PAGE
+    # ==============================
 
     return render(
         request,
